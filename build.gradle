@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '1.1.2'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'org.codehaus.groovy:groovy-all:3.0.5'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version = '2020.1' // 因为Android Studio 4.1是基于IDEA 2020.1 Community版本开发的，所以这里调试也指定为此版本
+    plugins = ['android']
+}
+
+buildSearchableOptions {
+    enabled = false
+}
+
+patchPluginXml {
+    changeNotes = """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+    sinceBuild = '191' // 插件适用的IDEA版本范围，此范围基本涵盖了Android Studio最近两年的版本
+    untilBuild = '212.*'
+}
+
+test {
+    useJUnitPlatform()
+}
