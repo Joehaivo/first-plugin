@@ -97,16 +97,16 @@ public class ImportPictureDialog extends DialogWrapper {
             Messages.showErrorDialog(project, "external folder or target folder is empty", "");
             return;
         }
-        for (VirtualFile externalFile : externalFiles) {
-            String target = PictureMapper.INSTANCE.getPictureMapper().get(externalFile.getName());
-            if (target == null) {
-                continue;
-            }
-            String[] strings = target.split("/");
-            String dir = strings[0];
-            String name = strings[1];
+        try {
+            for (VirtualFile externalFile : externalFiles) {
+                String target = PictureMapper.INSTANCE.getPictureMapper().get(externalFile.getName());
+                if (target == null) {
+                    continue;
+                }
+                String[] strings = target.split("/");
+                String dir = strings[0];
+                String name = strings[1];
 
-            try {
                 VirtualFile childDir = targetFolder.findChild(dir);
                 if (childDir == null) {
                     childDir = targetFolder.createChildDirectory(this, dir);
@@ -116,16 +116,20 @@ public class ImportPictureDialog extends DialogWrapper {
                     existFile.delete(this);
                 }
                 externalFile.copy(this, childDir, name);
-            } catch (IOException e) {
-                e.printStackTrace();
+
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Messages.showErrorDialog(project, "An unexpected error occurred, "+e.getMessage(), "");
+            return;
         }
         Messages.showInfoMessage("pictures import successful!", "");
         dispose();
     }
 
     @Override
-    protected @Nullable JComponent createCenterPanel() {
+    protected @Nullable
+    JComponent createCenterPanel() {
         setTitle("工具");
         setOKButtonText("导入");
         scrollPane.getViewport().setView(mapperList);
