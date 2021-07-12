@@ -1,10 +1,15 @@
-## Android Studio Plugin/Intellij IDEA 插件开发入门，开发属于自己的第一款插件
+## Android Studio Plugin/Intellij IDEA Plugin插件开发入门，开发属于自己的第一款插件
 
 ## 前置知识
 > Android Studio是基于Intellij IDEA开发的，所以需要使用IDEA开发插件，同时，开发出的插件可以适用于所有基于Jetbrain Intellij的系列产品，除非插件使用了特定平台的依赖库或者限定了适用的平台
 
 ## 功能需求
 > 对安卓工程下的各个res/mipmap内的不同大小的logo图片进行一键替换
+
+![微信截图_20210712165128.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/445c20eef18b4a52b6687f4b57cadf16~tplv-k3u1fbpfcp-watermark.image)
+
+## 仓库地址
+[GitHub](https://github.com/Joehaivo/first-plugin)
 
 ## 1. 初始化工程
 1. 打开IntelliJ IDEA Ultimate （我使用的是2021.1.3），点击New Project
@@ -110,7 +115,8 @@ public class ImportPictureAction extends AnAction {
 ```
 2. 完成后我们先调试一波，点击Run Plugin(▶)按钮，稍等一会儿会启动一个新的IDEA窗口实例，这个实例会自动安装好我们的插件，我们选择一个安卓工程打开，然后在左侧Project窗口内右键app/src/res文件夹，会发现菜单的底部出现了一个“导入图片”选项，点击出现下述图片，至此我们的插件已基本成型，接下来只需要编写业务代码即可
 
-![微信截图_20210712144910.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7169ee3af2d34a8091dac475fb48fa1c~tplv-k3u1fbpfcp-watermark.image)
+
+![微信截图_20210712144910.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/816696d472c3466da6f6bdc0852e829d~tplv-k3u1fbpfcp-watermark.image)
 
 3. 具体的业务代码不再此处列出了，查看源码即可，主要都在ImportPictureDialog.java类里
 
